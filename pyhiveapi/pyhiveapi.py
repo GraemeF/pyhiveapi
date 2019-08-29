@@ -761,18 +761,21 @@ class Pyhiveapi:
 
         if len(HSC.products.heating) > 0:
             for product in HSC.products.heating:
-                for device in HSC.devices.thermostat:
-                    if product["parent"] == device["props"]["zone"]:
-                        if "id" in product and "state" in product and "name" in product["state"]:
-                            node_name = product["state"]["name"]
-                            if len(HSC.products.heating) == 1:
-                                node_name = None
-                            device_list_climate.append({'HA_DeviceType': 'Heating', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, 'Hive_DeviceType': "Heating", 'Thermostat_NodeID': device["id"]})
-                            device_list_sensor.append({'HA_DeviceType': 'Heating_CurrentTemperature', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
-                            device_list_sensor.append({'HA_DeviceType': 'Heating_TargetTemperature', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
-                            device_list_sensor.append({'HA_DeviceType': 'Heating_State', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
-                            device_list_sensor.append({'HA_DeviceType': 'Heating_Mode', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
-                            device_list_sensor.append({'HA_DeviceType': 'Heating_Boost', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
+                thermostat_nodeid = "Thermostat_NodeID"
+                if len(HSC.devices.thermostat) > 0:
+                    for device in HSC.devices.thermostat:
+                        if product["parent"] == device["props"]["zone"]:
+                            thermostat_nodeid = device["id"]
+                if "id" in product and "state" in product and "name" in product["state"]:
+                    node_name = product["state"]["name"]
+                    if len(HSC.products.heating) == 1:
+                        node_name = None
+                    device_list_climate.append({'HA_DeviceType': 'Heating', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, 'Hive_DeviceType': "Heating", 'Thermostat_NodeID': thermostat_nodeid})
+                    device_list_sensor.append({'HA_DeviceType': 'Heating_CurrentTemperature', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
+                    device_list_sensor.append({'HA_DeviceType': 'Heating_TargetTemperature', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
+                    device_list_sensor.append({'HA_DeviceType': 'Heating_State', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
+                    device_list_sensor.append({'HA_DeviceType': 'Heating_Mode', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
+                    device_list_sensor.append({'HA_DeviceType': 'Heating_Boost', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
 
         if len(HSC.products.hotwater) > 0:
             for product in HSC.products.hotwater:
