@@ -1691,16 +1691,7 @@ class Pyhiveapi:
                             "mode" in HSC.products.hotwater[node_index]["state"]):
                         hotwater_mode_tmp = (HSC.products.hotwater[node_index]
                                              ["state"]["mode"])
-                        if hotwater_mode_tmp == "BOOST":
-                            if ("props" in HSC.products.hotwater[node_index] and
-                                    "previous" in
-                                    HSC.products.hotwater[node_index]["props"] and
-                                    "mode" in
-                                    HSC.products.hotwater[node_index]
-                                    ["props"]["previous"]):
-                                hotwater_mode_tmp = (HSC.products.hotwater[node_index]
-                                                     ["props"]["previous"]["mode"])
-                        elif hotwater_mode_tmp == "MANUAL":
+                        if hotwater_mode_tmp == "BOOST" or hotwater_mode_tmp == "MANUAL":
                             hotwater_mode_tmp = "ON"
                         hotwater_mode_found = True
 
