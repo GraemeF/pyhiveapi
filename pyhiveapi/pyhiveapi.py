@@ -804,9 +804,8 @@ class Pyhiveapi:
             for product in HSC.products.trv:
                 if "id" in product and "state" in product:
                     node_name = product["state"]["name"]
-                    device_list_climate.append({'HA_DeviceType': 'TRV', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "TRV"})
+                    device_list_climate.append({'HA_DeviceType': 'TRV', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "TRV", 'Thermostat_NodeID': product["id"]})
                     """device_list_sensor.append({'HA_DeviceType': 'TRV_CurrentTemperature', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "TRV"})"""
-                    
                     """device_list_sensor.append({'HA_DeviceType': 'Heating_TargetTemperature', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
                     device_list_sensor.append({'HA_DeviceType': 'Heating_State', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
                     device_list_sensor.append({'HA_DeviceType': 'Heating_Mode', 'Hive_NodeID': product["id"], 'Hive_NodeName': node_name, "Hive_DeviceType": "Heating"})
